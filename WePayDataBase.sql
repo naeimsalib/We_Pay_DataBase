@@ -28,7 +28,7 @@ ReasonOfLeaving VarChar(255) /*Holds Reason for Leaving the Company*/
 );
 
 /*Employee Login DataBase and there account Information*/
-CREATE TABLE Past_Employee_Table (
+CREATE TABLE Employee_Login_Table (
 UserName VarChar(255),
 Password VarChar(255),
 Email VarChar(255),
