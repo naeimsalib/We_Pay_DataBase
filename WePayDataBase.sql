@@ -1,4 +1,6 @@
 /*Data Base for all current Employees*/
+CREATE DATABASE wepay;
+USE wepay;
 
 CREATE TABLE Employee_Table (
 Name VarChar(255), /* holds the Employee Name*/
@@ -34,5 +36,5 @@ Password VarChar(255),
 Email VarChar(255),
 Phone_Number VarChar(255),
 SSN VarChar(255),
-User_Type VarChar(255),
+User_Type VarChar(255)
 );
