@@ -2,9 +2,9 @@
 CREATE DATABASE wepay;
 USE wepay;
 
-CREATE TABLE Employee_Table (
+CREATE TABLE employee (
+ID int NOT NULL IDENTITY(1,1), /* Holds the Person ID*/
 Name VarChar(255), /* holds the Employee Name*/
-ID int, /* Holds the Person ID*/
 Salary VarChar(255),/*Holds the Employee Salary*/
 Status int, /* Holds the Employee Work Status, 0 for not working , 1 for working*/
 StartDate DATE, /*Holds the employee hiring date*/
@@ -19,9 +19,9 @@ SSN VarChar(255) /*Holds the Employee SSN*/
 
 /*Holds data for past employees, and why they Left(Fired or Quit)*/
 
-CREATE TABLE Past_Employee_Table (
+CREATE TABLE past_employee (
+ID int NOT NULL IDENTITY(1,1), /* Holds the Person ID*/
 Name VarChar(255), /* holds the Employee Name*/
-ID int, /* Holds the Person ID*/
 Salary VarChar(255),/*Holds the Employee Salary*/
 StartDate DATE, /*Holds the employee hiring date*/
 Position VarChar(255), /*Holds there position*/
@@ -30,7 +30,7 @@ ReasonOfLeaving VarChar(255) /*Holds Reason for Leaving the Company*/
 );
 
 /*Employee Login DataBase and there account Information*/
-CREATE TABLE Employee_Login_Table (
+CREATE TABLE employee_account(
 UserName VarChar(255),
 Password VarChar(255),
 Email VarChar(255),
