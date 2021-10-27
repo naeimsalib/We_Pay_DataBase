@@ -20,8 +20,8 @@ con.connect((err) => {
   console.log("DB Connected.")
 })
 
-//testing to get the result from the DB
-app.get("/", function (req, res) {
+//get every employee
+app.get("/employees", function (req, res) {
   con.query("SELECT * FROM employee", function (err, result, fields){
     if(err) throw err;
     console.log(result)
