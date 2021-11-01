@@ -38,3 +38,12 @@ Phone_Number VarChar(255),
 SSN VarChar(255),
 User_Type VarChar(255)
 );
+
+CREATE TABLE employee_benefits (
+beID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+Name VarChar(255), 
+PTO int, 
+Health_Insurance int,
+Food_Stipend int,
+Dental_Insurance int
+);
