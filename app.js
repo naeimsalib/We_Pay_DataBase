@@ -19,6 +19,7 @@ const con = sql.createConnection({
 con.connect((err) => {
   if (err) throw err;
   console.log("DB Connected.");
+
 });
 
 app.get("/benefits", function (req, res) {
@@ -36,6 +37,7 @@ app.get("/employees", function (req, res) {
     res.send(result);
   });
 });
+
 const startListening = () => {
   const PORT = 3001;
   app.listen(PORT, () => {
