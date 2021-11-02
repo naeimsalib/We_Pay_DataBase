@@ -15,15 +15,27 @@ const con = sql.createConnection({
   database: "wepay",
 });
 
-// Our apiRouter
-const apiRouter = require("./routes/index");
-
-app.use("/api", apiRouter);
-
 //connect to the database
 con.connect((err) => {
   if (err) throw err;
   console.log("DB Connected.");
+
+});
+
+app.get("/benefits", function (req, res) {
+  con.query("SELECT * FROM employee_benefits", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  });
+});
+
+app.get("/employees", function (req, res) {
+  con.query("SELECT * FROM employee", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  });
 });
 
 const startListening = () => {
