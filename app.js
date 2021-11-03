@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 
 //allows for middleware to work
 app.use(cors());
+app.use(express.json());
 
 //allows for post method to work
 app.use(bodyParser.json());
@@ -25,9 +26,9 @@ con.connect((err) => {
   console.log("DB Connected.");
 });
 
-//get every employee
-app.get("/employees", function (req, res) {
-  con.query("SELECT * FROM employee", function (err, result, fields) {
+//get benefits
+app.get("/benefits", function (req, res) {
+  con.query("SELECT * FROM employee_benefits", function (err, result, fields) {
     if (err) throw err;
     console.log(result);
     res.send(result);
@@ -56,18 +57,28 @@ app.post("/addemployee", function (req, res) {
   });
 });
 
-//delete employee
-app.delete("/removeemployee", function(req, res){
+//get every employee
+app.get("/employees", function (req, res) {
+  con.query("SELECT * FROM employee", function (err, results, fields) {
+    if (err) throw err;
+    console.log(results);
+    res.send(results);
+  });
+});
+
+//find employee
+app.post("/findemployee", function (req, res) {
   console.log(req.body);
-  let stmt = "DELETE FROM employee WHERE eID = ?";
-  let data = req.body.id;
+  let stmt = "SELECT * FROM Employee WHERE name = ? AND SSN LIKE ?";
+  let data = [req.body.name, "%"+ req.body.SSN];
   con.query(stmt, data, (err, results, fields) => {
-    if (err) { 
+    res.send(results)
+    if (err) {
       return console.error(err.message);
     }
-  })
+  });
 
-})
+});
 
 const startListening = () => {
   const PORT = 3001;

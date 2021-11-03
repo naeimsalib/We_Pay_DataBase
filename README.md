@@ -10,4 +10,5 @@ Run using `node app.js`
   <li>Employee_Table</li>
   <li>Past_Employee_Table</li>
   <li>Employee_Login_Table</li>
+  <li>Employee_Benefits_Table</li>
 </ul>

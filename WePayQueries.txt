@@ -49,3 +49,44 @@ WHERE SSN = "";
 /*Get all Information from UserLogin Table for a spicific type of User*/
 SELECT * FROM Employee_Login_Table
 WHERE User_Type = "";
+
+
+/* Delete a User from a Table, by Username*/
+/*From employee Table*/
+DECLARE @Name VarChar(225);
+DECLARE @SSN VarChar(225);
+DECLARE @UserName VarChar(225);
+DECLARE @PhoneNumber VarChar(225);
+
+DELETE FROM employee
+WHERE Name = @Name;
+DELETE FROM employee
+WHERE SSN = @SSN;
+DELETE FROM employee
+WHERE Phone_Number = @PhoneNumber;
+
+DELETE FROM past_employee
+WHERE Name = @Name;
+DELETE FROM employee
+WHERE Phone_Number = @PhoneNumber;
+
+DELETE FROM employee_account
+WHERE UserName = @UserName;
+DELETE FROM employee
+WHERE SSN = @SSN;
+DELETE FROM employee
+WHERE SSN = @SSN;
+
+
+/*Add users to any table, Just Pass in th Data to the Varible and call the Insert Quieri*/
+DECLARE @Name VarChar(255), @ID int, @Salary VarChar(255), @Status int, @StartDate DATE, @Position VarChar(255), @Manager int, @Address VarChar(255), @WorkState VarChar(255), @LivingState VarChar(255), @Phone_Number VarChar(255), @SSN VarChar(255);
+INSERT INTO employee (ID, Name, Salary, Status, StartDate, Position, Manager, Address, WorkState, LivingState, Phone_Number, SSN)
+VALUES ('John Doe', '95,000', 1, '08-26-2021', 'Engineer', 0, '123 Main STreet, NewYork, NY, 01234', 'NY', 'NY', '347-444-5555', '123-54-0987');
+
+
+DECLARE @Name VarChar(255), @ID int, @Salary VarChar(255), @StartDate DATE, @Position VarChar(255), @Phone_Number VarChar(255), @ReasonOfLeaving VarChar(255);
+INSERT INTO past_employee (@ID,@ Name, @Salary, @StartDate, @Position, @Phone_Number, @ReasonOfLeaving);
+
+
+DECLARE @UserName VarChar(255), @Password VarChar(255), @Email VarChar(255), @Phone_Number VarChar(255), @SSN VarChar(255), @User_Type VarChar(255);
+INSERT INTO employee_account (@UserName, @Password, Email, @Phone_Number, @SSN, @User_Type);
