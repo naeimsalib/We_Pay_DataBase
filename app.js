@@ -26,6 +26,7 @@ con.connect((err) => {
   console.log("DB Connected.");
 });
 
+// ==========BENEFITS===========
 //get benefits
 app.get("/benefits", function (req, res) {
   con.query("SELECT * FROM employee_benefits", function (err, result, fields) {
@@ -35,12 +36,47 @@ app.get("/benefits", function (req, res) {
   });
 });
 
-//add employee
+//get individual benefits
+app.post("/getemployeebenefit", function (req, res) {
+  if (req.body.name != "" && req.body.SSN != "") {
+    let stmt = "SELECT * FROM employee_benefits WHERE name = ?";
+    let data = [req.body.name];
+    con.query(stmt, data, (err, results, fields) => {
+      res.send(results);
+      if (err) {
+        return console.error(err.message);
+      }
+    });
+  }
+});
+
+//update benefits
+app.put("/updateemployeebenefit", function (req, res) {
+  console.log(req.body);
+  let stmt =
+    "UPDATE employee_benefits SET PTO = ?, Health_Insurance = ?, Food_Stipend = ?, Dental_Insurance = ? WHERE  NAME = ?;";
+  let data = [
+    req.body.PTO,
+    req.body.Health_Insurance,
+    req.body.Food_Stipend,
+    req.body.Dental_Insurance,
+    req.body.name
+  ];
+  con.query(stmt, data, (err, results, fields) => {
+    res.send(results);
+    if (err) {
+      return console.error(err.message);
+    }
+  });
+});
+
+// ==========EMPLOYEES===========
+//add employee & benefits
 app.post("/addemployee", function (req, res) {
   console.log(req.body);
   let stmt =
     "INSERT INTO employee (Name, Salary, Status, Position, Address, WorkState, LivingState, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-  let data = [
+  let employeedata = [
     req.body.name,
     req.body.salary,
     req.body.status,
@@ -50,7 +86,26 @@ app.post("/addemployee", function (req, res) {
     req.body.livingState,
     req.body.SSN,
   ];
-  con.query(stmt, data, (err, results, fields) => {
+
+  let stmt1 =
+    "INSERT INTO employee_benefits (Name, PTO, Health_Insurance, Food_Stipend, Dental_Insurance) VALUES (?, ?, ?, ?, ?)";
+  let benefitsdata = [
+    req.body.name,
+    req.body.PTO,
+    req.body.Health_Insurance,
+    req.body.Food_Stipend,
+    req.body.Dental_Insurance
+  ]
+
+  //add employee
+  con.query(stmt, employeedata, (err, results, fields) => {
+    if (err) {
+      return console.error(err.message);
+    }
+  });
+
+  //add employee's benefits
+  con.query(stmt1, benefitsdata, (err, results, fields) => {
     if (err) {
       return console.error(err.message);
     }
@@ -68,16 +123,39 @@ app.get("/employees", function (req, res) {
 
 //find employee
 app.post("/findemployee", function (req, res) {
-  console.log(req.body);
-  let stmt = "SELECT * FROM Employee WHERE name = ? AND SSN LIKE ?";
-  let data = [req.body.name, "%"+ req.body.SSN];
+  if (req.body.name != "" && req.body.SSN != "") {
+    let stmt = "SELECT * FROM Employee WHERE name = ? AND SSN LIKE ?";
+    let data = [req.body.name, "%" + req.body.SSN];
+    con.query(stmt, data, (err, results, fields) => {
+      res.send(results);
+      if (err) {
+        return console.error(err.message);
+      }
+    });
+  }
+});
+
+//update employee
+app.put("/updateemployee", function (req, res) {
+  let stmt =
+    "UPDATE employee SET Name = ?, Salary = ?, Address = ?, Phone_Number = ?, Position = ?, WorkState = ?, LivingState = ? WHERE  NAME = ? AND SSN LIKE ?;";
+  let data = [
+    req.body.name,
+    req.body.salary,
+    req.body.address,
+    req.body.phoneNum,
+    req.body.position,
+    req.body.workState,
+    req.body.livingState,
+    req.body.name,
+    "%" + req.body.SSN,
+  ];
   con.query(stmt, data, (err, results, fields) => {
-    res.send(results)
+    res.send(results);
     if (err) {
       return console.error(err.message);
     }
   });
-
 });
 
 const startListening = () => {
