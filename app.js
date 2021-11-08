@@ -75,11 +75,12 @@ app.put("/updateemployeebenefit", function (req, res) {
 app.post("/addemployee", function (req, res) {
   console.log(req.body);
   let stmt =
-    "INSERT INTO employee (Name, Salary, Status, Position, Address, WorkState, LivingState, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO employee (Name, Salary, Status, Phone_Number, Position, Address, WorkState, LivingState, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
   let employeedata = [
     req.body.name,
     req.body.salary,
     req.body.status,
+    req.body.phoneNum,
     req.body.position,
     req.body.address,
     req.body.workState,
@@ -157,6 +158,16 @@ app.put("/updateemployee", function (req, res) {
     }
   });
 });
+
+//get past employees
+app.get("/pastemployees", function (req, res) {
+  con.query("SELECT * FROM past_employee", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  });
+});
+
 
 const startListening = () => {
   const PORT = 3001;
