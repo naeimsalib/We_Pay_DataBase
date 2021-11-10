@@ -104,7 +104,6 @@ app.post("/addemployee", function (req, res) {
       return console.error(err.message);
     }
   });
-
   //add employee's benefits
   con.query(stmt1, benefitsdata, (err, results, fields) => {
     if (err) {
@@ -121,6 +120,15 @@ app.get("/employees", function (req, res) {
     res.send(results);
   });
 });
+
+//get total employees currently
+app.get("/getemployeecount", function(req,res){
+  con.query("SELECT COUNT(*) as TOTAL from employee", function(err, results, fields){
+    if (err) throw err;
+    console.log(results)
+    res.send(results);
+  })
+})
 
 //find employee
 app.post("/findemployee", function (req, res) {
