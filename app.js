@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const con = sql.createConnection({
   host: "localhost",
   user: "root",
-  password: "123",
+  password: "fartrip921",
   database: "wepay",
 });
 
