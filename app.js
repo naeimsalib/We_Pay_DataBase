@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const con = sql.createConnection({
   host: "localhost",
   user: "root",
-  password: "fartrip921",
+  password: "123",
   database: "wepay",
 });
 
@@ -75,19 +75,18 @@ app.put("/updateemployeebenefit", function (req, res) {
 app.post("/addemployee", function (req, res) {
   console.log(req.body);
   let stmt =
-    "INSERT INTO employee (Name, Email, Salary, Status, StartDate, Position, Manager, Address, WorkState, LivingState, Phone_Number, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO employee (Name, Email, Salary, Status, StartDate, Position, Address, WorkState, LivingState, Phone_Number, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   let employeedata = [
     req.body.name,
     req.body.email,
     req.body.salary,
     req.body.status,
     req.body.startDate,
-    req.body.phoneNum,
     req.body.position,
-    req.body.manager,
     req.body.address,
     req.body.workState,
     req.body.livingState,
+    req.body.phoneNum,
     req.body.SSN,
   ];
 
@@ -169,7 +168,7 @@ app.put("/updateemployee", function (req, res) {
   let data = [
     req.body.name,
     req.body.email,
-    req.body.salary,
+    parseInt(req.body.salary),
     req.body.status,
     req.body.StartDate,
     req.body.manager,
@@ -181,7 +180,9 @@ app.put("/updateemployee", function (req, res) {
     req.body.name,
     "%" + req.body.SSN,
   ];
+  console.log(data)
   con.query(stmt, data, (err, results, fields) => {
+    console.log(results)
     res.send(results);
     if (err) {
       return console.error(err.message);
