@@ -82,12 +82,12 @@ app.post("/addemployee", function (req, res) {
     req.body.salary,
     req.body.status,
     req.body.startDate,
+    req.body.phoneNum,
     req.body.position,
     req.body.manager,
     req.body.address,
     req.body.workState,
     req.body.livingState,
-    req.body.Phone_Number,
     req.body.SSN,
   ];
 
@@ -107,7 +107,6 @@ app.post("/addemployee", function (req, res) {
       return console.error(err.message);
     }
   });
-
   //add employee's benefits
   con.query(stmt1, benefitsdata, (err, results, fields) => {
     if (err) {
@@ -123,6 +122,30 @@ app.get("/employees", function (req, res) {
     console.log(results);
     res.send(results);
   });
+});
+
+//get total employees currently
+app.get("/getemployeecount", function (req, res) {
+  con.query(
+    "SELECT COUNT(*) as TOTAL from employee",
+    function (err, results, fields) {
+      if (err) throw err;
+      console.log(results);
+      res.send(results);
+    }
+  );
+});
+
+//get total employees that needs to be reviewed
+app.get("/totalneedsreviewed", function (req, res) {
+  con.query(
+    "SELECT COUNT(*) as TOTAL_STATUS from employee WHERE Status = 2",
+    function (err, results, fields) {
+      if (err) throw err;
+      console.log(results);
+      res.send(results);
+    }
+  );
 });
 
 //find employee
@@ -211,7 +234,7 @@ app.post("past_employees", function (req, res) {
 app.put("/updatepastemployee", function (req, res) {
   console.log(req.body);
   let stmt =
-    "UPDATE past_employee SET Name = ?, Salary = ?, StartDate = ?, Position = ?, Phone_Number = ?, Email = ?, ReasonOfLeaving = ?, WHERE NAME = ?;";
+    "UPDATE past_employee SET Name = ?, Salary = ?, StartDate = ?, Position = ?, Phone_Number = ?, Email = ?, ReasonOfLeaving = ? WHERE NAME = ?;";
   let data = [
     req.body.name,
     req.body.salary,
