@@ -5,7 +5,7 @@ USE wepay;
 CREATE TABLE employee (
 eID int NOT NULL PRIMARY KEY AUTO_INCREMENT, /* Holds the Person ID*/
 Name VarChar(255), /* holds the Employee Name*/
-Salary VarChar(255),/*Holds the Employee Salary*/
+Salary int,/*Holds the Employee Salary*/
 Status int, /* Holds the Employee Work Status, 0 for not working , 1 for working*/
 StartDate DATE, /*Holds the employee hiring date*/
 Position VarChar(255), /*Holds there position*/
@@ -22,7 +22,7 @@ SSN VarChar(255) /*Holds the Employee SSN*/
 CREATE TABLE past_employee (
 peID int NOT NULL PRIMARY KEY AUTO_INCREMENT, /* Holds the Person ID*/
 Name VarChar(255), /* holds the Employee Name*/
-Salary VarChar(255),/*Holds the Employee Salary*/
+Salary int,/*Holds the Employee Salary*/
 StartDate DATE, /*Holds the employee hiring date*/
 Position VarChar(255), /*Holds there position*/
 Phone_Number VarChar(255), /*Holds the employee Phone Number*/
