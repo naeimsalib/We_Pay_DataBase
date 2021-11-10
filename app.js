@@ -60,7 +60,7 @@ app.put("/updateemployeebenefit", function (req, res) {
     req.body.Health_Insurance,
     req.body.Food_Stipend,
     req.body.Dental_Insurance,
-    req.body.name
+    req.body.name,
   ];
   con.query(stmt, data, (err, results, fields) => {
     res.send(results);
@@ -75,15 +75,19 @@ app.put("/updateemployeebenefit", function (req, res) {
 app.post("/addemployee", function (req, res) {
   console.log(req.body);
   let stmt =
-    "INSERT INTO employee (Name, Salary, Status, Position, Address, WorkState, LivingState, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO employee (Name, Email, Salary, Status, StartDate, Position, Manager, Address, WorkState, LivingState, Phone_Number, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   let employeedata = [
     req.body.name,
+    req.body.email,
     req.body.salary,
     req.body.status,
+    req.body.startDate,
     req.body.position,
+    req.body.manager,
     req.body.address,
     req.body.workState,
     req.body.livingState,
+    req.body.Phone_Number,
     req.body.SSN,
   ];
 
@@ -94,8 +98,8 @@ app.post("/addemployee", function (req, res) {
     req.body.PTO,
     req.body.Health_Insurance,
     req.body.Food_Stipend,
-    req.body.Dental_Insurance
-  ]
+    req.body.Dental_Insurance,
+  ];
 
   //add employee
   con.query(stmt, employeedata, (err, results, fields) => {
@@ -138,10 +142,14 @@ app.post("/findemployee", function (req, res) {
 //update employee
 app.put("/updateemployee", function (req, res) {
   let stmt =
-    "UPDATE employee SET Name = ?, Salary = ?, Address = ?, Phone_Number = ?, Position = ?, WorkState = ?, LivingState = ? WHERE  NAME = ? AND SSN LIKE ?;";
+    "UPDATE employee SET Name = ?, Email = ?, Salary = ?, Status = ?, StartDate = ?, Manager = ?, Address = ?, Phone_Number = ?, Position = ?, WorkState = ?, LivingState = ? WHERE  NAME = ? AND SSN LIKE ?;";
   let data = [
     req.body.name,
+    req.body.email,
     req.body.salary,
+    req.body.status,
+    req.body.StartDate,
+    req.body.manager,
     req.body.address,
     req.body.phoneNum,
     req.body.position,
@@ -149,6 +157,69 @@ app.put("/updateemployee", function (req, res) {
     req.body.livingState,
     req.body.name,
     "%" + req.body.SSN,
+  ];
+  con.query(stmt, data, (err, results, fields) => {
+    res.send(results);
+    if (err) {
+      return console.error(err.message);
+    }
+  });
+});
+
+//delete employee
+app.get("/deleteemployee", function (req, res) {
+  con.query(
+    "DELETE FROM employee WHERE Name = ?",
+    function (err, result, fields) {
+      if (err) throw err;
+      console.log(result);
+      res.send(result);
+    }
+  );
+});
+
+//PAST_EMPLOYEE
+//get past_employee
+app.get("/past_employees", function (req, res) {
+  con.query("SELECT * FROM past_employee", function (err, results, fields) {
+    if (err) throw err;
+    console.log(results);
+    res.send(results);
+  });
+});
+
+app.post("past_employees", function (req, res) {
+  let stmt =
+    "INSERT INTO past_employee (Name, Salary, StartDate, Position, Phone_Number, Email, ReasonOfLeaving) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  let data = [
+    req.body.name,
+    req.body.email,
+    req.body.salary,
+    req.body.startdate,
+    req.body.phoneNum,
+    req.body.position,
+    req.body.workState,
+    req.body.reasonofleaving,
+  ];
+  con.query(stmt, data, function (err, results, fields) {
+    if (err) throw err;
+    console.log(results);
+    res.send(results);
+  });
+});
+
+app.put("/updatepastemployee", function (req, res) {
+  console.log(req.body);
+  let stmt =
+    "UPDATE past_employee SET Name = ?, Salary = ?, StartDate = ?, Position = ?, Phone_Number = ?, Email = ?, ReasonOfLeaving = ?, WHERE NAME = ?;";
+  let data = [
+    req.body.name,
+    req.body.salary,
+    req.body.startdate,
+    req.body.position,
+    req.body.phone_number,
+    req.body.email,
+    req.body.reasonofleaving,
   ];
   con.query(stmt, data, (err, results, fields) => {
     res.send(results);
