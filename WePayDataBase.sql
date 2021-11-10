@@ -6,6 +6,7 @@ CREATE TABLE employee (
 eID int NOT NULL PRIMARY KEY AUTO_INCREMENT, /* Holds the Person ID*/
 Name VarChar(255), /* holds the Employee Name*/
 Salary int,/*Holds the Employee Salary*/
+Email VarChar(255),  
 Status int, /* Holds the Employee Work Status, 0 for not working , 1 for working*/
 StartDate DATE, /*Holds the employee hiring date*/
 Position VarChar(255), /*Holds there position*/
@@ -26,6 +27,7 @@ Salary int,/*Holds the Employee Salary*/
 StartDate DATE, /*Holds the employee hiring date*/
 Position VarChar(255), /*Holds there position*/
 Phone_Number VarChar(255), /*Holds the employee Phone Number*/
+Email VarChar(255),
 ReasonOfLeaving VarChar(255) /*Holds Reason for Leaving the Company*/
 );
 
