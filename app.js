@@ -203,7 +203,7 @@ app.get("/deleteemployee", function (req, res) {
 
 //PAST_EMPLOYEE
 //get past_employee
-app.get("/past_employees", function (req, res) {
+app.get("/pastemployees", function (req, res) {
   con.query("SELECT * FROM past_employee", function (err, results, fields) {
     if (err) throw err;
     console.log(results);
@@ -211,7 +211,7 @@ app.get("/past_employees", function (req, res) {
   });
 });
 
-app.post("past_employees", function (req, res) {
+app.post("pastemployees", function (req, res) {
   let stmt =
     "INSERT INTO past_employee (Name, Salary, StartDate, Position, Phone_Number, Email, ReasonOfLeaving) VALUES (?, ?, ?, ?, ?, ?, ?)";
   let data = [
