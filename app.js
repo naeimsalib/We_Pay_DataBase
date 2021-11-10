@@ -130,6 +130,16 @@ app.get("/getemployeecount", function(req,res){
   })
 })
 
+//get total employees that needs to be reviewed
+app.get("/totalneedsreviewed", function(req,res){
+  con.query("SELECT COUNT(*) as TOTAL_STATUS from employee WHERE Status = 2", function(err, results, fields){
+    if (err) throw err;
+    console.log(results)
+    res.send(results);
+  })
+})
+
+
 //find employee
 app.post("/findemployee", function (req, res) {
   if (req.body.name != "" && req.body.SSN != "") {
