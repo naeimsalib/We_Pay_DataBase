@@ -190,9 +190,10 @@ app.put("/updateemployee", function (req, res) {
 });
 
 //delete employee
-app.get("/deleteemployee", function (req, res) {
+app.post("/deleteemployee", function (req, res) {
+  let name = req.body.name
   con.query(
-    "DELETE FROM employee WHERE Name = ?",
+    "DELETE FROM employee WHERE Name = ?",name, 
     function (err, result, fields) {
       if (err) throw err;
       console.log(result);
@@ -211,23 +212,21 @@ app.get("/pastemployees", function (req, res) {
   });
 });
 
-app.post("pastemployees", function (req, res) {
+app.post("/insertpastemployees", function (req, res) {
   let stmt =
-    "INSERT INTO past_employee (Name, Salary, StartDate, Position, Phone_Number, Email, ReasonOfLeaving) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO past_employee (Name, Salary, Position, Phone_Number, Email, ReasonOfLeaving) VALUES (?, ?, ?, ?, ?, ?)";
   let data = [
     req.body.name,
-    req.body.email,
     req.body.salary,
-    req.body.startdate,
-    req.body.phoneNum,
     req.body.position,
-    req.body.workState,
+    req.body.phoneNum,
+    req.body.email,
     req.body.reasonofleaving,
   ];
   con.query(stmt, data, function (err, results, fields) {
     if (err) throw err;
     console.log(results);
-    res.send(results);
+    // res.send(results);
   });
 });
 
