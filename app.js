@@ -50,6 +50,18 @@ app.post("/getemployeebenefit", function (req, res) {
   }
 });
 
+//delete benefits
+app.post("/deletebenefits", function (req, res) {
+  let stmt = "DELETE FROM employee_benefits WHERE name = ?";
+  let data = [req.body.name];
+  con.query(stmt, data, (err, results, fields) => {
+    res.send(results);
+    if (err) {
+      return console.error(err.message);
+    }
+  });
+});
+
 //update benefits
 app.put("/updateemployeebenefit", function (req, res) {
   console.log(req.body);
