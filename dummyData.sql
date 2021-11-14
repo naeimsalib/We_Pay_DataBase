@@ -24,7 +24,18 @@ VALUES ('JohnDoe123', 'Password123', 'John_Doe@gmail.com', '347-444-5555', '123-
 ('Hesham Snorri', 'Password123', 'Hesham_Snorri@gmail.com', '347-444-5555', '123-54-0987', 'Sales');
 
 INSERT INTO employee_benefits (Name, PTO, Health_Insurance, Food_Stipend, Dental_Insurance)
-VALUES ('John Doe', '12', '600', '25', '500'),
-('Cortney Pravin', '12', '600', '25', '500'),
-('Mike Johnson', '12', '600', '25', '500'),
-('Abram Liva', '12', '600', '25', '500');
+VALUES ('John Doe', '12', '100', '50', '15'),
+('Cortney Pravin', '12', '0', '50', '0'),
+('Mike Johnson', '12', '0', '0', '0'),
+('Hesham Snorri', '12', '100', '50', '15'),
+('Amaury Posie', '12', '100', '50', '15'),
+('Abram Liva', '12', '100', '50', '15');
+
+
+INSERT INTO payroll (Name, Salary, PaycheckDate, GrossPay, Taxes, Benefits, Total)
+VALUES ('John Doe', 95000, '2021-11-01 00:00:00', 3846.15, 713.81, 0, 3132.34),
+('Cortney Pravin', 75000, '2021-11-01 00:00:00', 2884.62, 432.96, 0, 2451.66),
+('Mike Johnson', 105000, '2021-11-01 00:00:00', 4038.46, 740.69, 0, 3297.77),
+('Hesham Snorri', 75000, '2021-11-01 00:00:00', 2884.62, 432.96, 0, 2451.66),
+('Amaury Posie', 95000, '2021-11-01 00:00:00', 3653.85, 686.92, 0, 2966.93),
+('Abram Liva', 95000, '2021-11-01 00:00:00', 3653.85, 686.92, 0, 2966.93);

@@ -252,6 +252,49 @@ app.put("/updatepastemployee", function (req, res) {
   });
 });
 
+//======PAYROLL======
+//get the most recent payroll of one employee
+app.post("/getRecentPayroll", function (req, res) {
+  const stmt = "Select * FROM payroll WHERE Name = ? AND PaycheckDate = (select max(PaycheckDate) from payroll where Name = ? );"
+  console.log(req.body)
+  const data = [req.body.name, req.body.name];
+  con.query(stmt, data, function (err, results, fields) {
+    if (err) throw err;
+    console.log(results);
+    res.send(results);
+  });
+});
+
+//add payroll into the db after running the payroll for an employee
+app.post("/postPayroll", function (req, res){
+    let stmt = "INSERT INTO payroll (Name, Salary, PaycheckDate, GrossPay, Taxes, Benefits, Total) VALUES (?, ?, ?, ?, ?, ?, ?);"
+    let data = [
+      req.body.name,
+      req.body.salary,
+      req.body.paycheckDate,
+      req.body.grossPay,
+      req.body.taxes,
+      req.body.benefits,
+      req.body.total
+    ]
+    con.query(stmt, data, function(err, results, fields){
+      if(err) throw err;
+      console.log(results);
+    })
+})
+
+//get every paycheck from one employee
+app.post("/getEmployeePaychecks", function (req, res) {
+  const stmt = "Select * FROM payroll WHERE Name = ?;"
+  console.log(req.body)
+  const data = [req.body.name, req.body.name];
+  con.query(stmt, data, function (err, results, fields) {
+    if (err) throw err;
+    console.log(results);
+    res.send(results);
+  });
+});
+
 const startListening = () => {
   const PORT = 3001;
   app.listen(PORT, () => {

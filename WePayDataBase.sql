@@ -49,3 +49,14 @@ Health_Insurance int,
 Food_Stipend int,
 Dental_Insurance int
 );
+
+CREATE TABLE payroll (
+pID int NOT NULL PRIMARY KEY AUTO_INCREMENT, /* Holds the payroll ID*/
+Name VarChar(255), /* holds the Employee Name*/
+Salary int,/*Holds the Employee Salary*/
+PaycheckDate TIMESTAMP, /*Date of when the payroll was posted*/
+GrossPay decimal(10,2), /*Total pay before deductions*/
+Taxes decimal(10,2), /*Total taxes*/
+Benefits decimal(10,2), /*Total Benefits*/
+Total decimal(10,2) /*Net pay*/
+);
