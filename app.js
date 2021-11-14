@@ -147,11 +147,25 @@ app.get("/totalneedsreviewed", function (req, res) {
   );
 });
 
-//find employee
+//find employee by name and ssn
 app.post("/findemployee", function (req, res) {
   if (req.body.name != "" && req.body.SSN != "") {
     let stmt = "SELECT * FROM Employee WHERE name = ? AND SSN LIKE ?";
     let data = [req.body.name, "%" + req.body.SSN];
+    con.query(stmt, data, (err, results, fields) => {
+      res.send(results);
+      if (err) {
+        return console.error(err.message);
+      }
+    });
+  }
+});
+
+//find employee by name
+app.post("/findemployeebyname", function (req, res) {
+  if (req.body.name != "") {
+    let stmt = "SELECT * FROM Employee WHERE name LIKE ?;";
+    let data = req.body.name + "%";
     con.query(stmt, data, (err, results, fields) => {
       res.send(results);
       if (err) {
