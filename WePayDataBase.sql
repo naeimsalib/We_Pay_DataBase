@@ -33,6 +33,7 @@ ReasonOfLeaving VarChar(255) /*Holds Reason for Leaving the Company*/
 
 /*Employee Login DataBase and there account Information*/
 CREATE TABLE employee_account(
+Name VarChar(255),
 UserName VarChar(255) PRIMARY KEY,
 Password VarChar(255),
 Email VarChar(255),

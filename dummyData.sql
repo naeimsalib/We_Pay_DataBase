@@ -15,13 +15,14 @@ VALUES ('John Doe', 85000, '2021-08-26', 'Sales', '347-444-5555', 'John_Doe@gmai
 ('Jayadeva Lucky', 95000, '2021-08-26', 'Sales', '347-444-5555', 'Jayadeva_Lucky@gmail.com', 'Fired'),
 ('Rakesh Tuor', 105000, '2021-08-26', 'Manager', '347-444-5555', 'Rakesh_Tuor@gmail.com', 'Quit');
 
-INSERT INTO employee_account (UserName, Password, Email, Phone_Number, SSN, User_Type)
-VALUES ('JohnDoe123', 'Password123', 'John_Doe@gmail.com', '347-444-5555', '123-54-0987', 'HR'),
-('CortneyPravin', 'PCortney', 'Cortney_Pravin@gmail.com', '347-444-5555', '123-54-0987', 'Sales'),
-('MikeJohnson', 'Password123', 'Mike_Johnson@gmail.com', '347-444-5555', '123-54-0987', 'Manager'),
-('AbramLiva', 'Password123', 'Abram_Liva@gmail.com', '347-444-5555', '123-54-0987', 'Driver'),
-('AmauryPosie', 'Password123', 'Amaury_Posie@gmail.com', '347-444-5555', '123-54-0987', 'Repair Tech'),
-('Hesham Snorri', 'Password123', 'Hesham_Snorri@gmail.com', '347-444-5555', '123-54-0987', 'Sales');
+INSERT INTO employee_account (Name, UserName, Password, Email, Phone_Number, SSN, User_Type)
+VALUES ('John Doe', 'JohnDoe', 'Password123', 'John_Doe@gmail.com', '347-444-5555', '123-54-0987', 'Engineer'),
+('Cortney Pravin', 'CortneyPravin', 'PCortney', 'Cortney_Pravin@gmail.com', '347-444-5555', '111-22-3333', 'Sales'),
+('Mike Johnson', 'MikeJohnson', 'Password123', 'Mike_Johnson@gmail.com', '347-444-5555', '444-55-6666', 'Manager'),
+('Abram Liva', 'AbramLiva', 'Password123', 'Abram_Liva@gmail.com', '347-444-5555', '888-89-6789', 'Driver'),
+('Amaury Posie', 'AmauryPosie', 'Password123', 'Amaury_Posie@gmail.com', '347-444-5555', '101-09-8888', 'Repair Tech'),
+('Hesham Snorri', 'Hesham Snorri', 'Password123', 'Hesham_Snorri@gmail.com', '347-444-5555', '777-88-9999', 'Sales'),
+('Giselle Domingo', 'GiselleDomingo', '123', 'Giselle_Domingo@gmail.com', '347-444-5555', '123-54-0987', 'HR');
 
 INSERT INTO employee_benefits (Name, PTO, Health_Insurance, Food_Stipend, Dental_Insurance)
 VALUES ('John Doe', '12', '100', '50', '15'),

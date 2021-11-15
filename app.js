@@ -26,6 +26,26 @@ con.connect((err) => {
   console.log("DB Connected.");
 });
 
+//=========EMPLOYEE ACCOUNT==========
+//login
+app.use("/login", (req, res) => {
+  let stmt =
+    "SELECT * FROM employee_account WHERE UserName = ? AND Password = ?;";
+  let data = [req.body.username, req.body.password];
+  console.log(data)
+  con.query(stmt, data, (err, results, fields) => {
+    console.log(results)
+    let data = {
+      data:results[0],
+      token: '123token'
+    }
+    res.send(data);
+    if (err) {
+      return console.error(err.message);
+    }
+  });
+});
+
 // ==========BENEFITS===========
 //get benefits
 app.get("/benefits", function (req, res) {
@@ -206,9 +226,9 @@ app.put("/updateemployee", function (req, res) {
     req.body.name,
     "%" + req.body.SSN,
   ];
-  console.log(data)
+  console.log(data);
   con.query(stmt, data, (err, results, fields) => {
-    console.log(results)
+    console.log(results);
     res.send(results);
     if (err) {
       return console.error(err.message);
@@ -218,9 +238,10 @@ app.put("/updateemployee", function (req, res) {
 
 //delete employee
 app.post("/deleteemployee", function (req, res) {
-  let name = req.body.name
+  let name = req.body.name;
   con.query(
-    "DELETE FROM employee WHERE Name = ?",name, 
+    "DELETE FROM employee WHERE Name = ?",
+    name,
     function (err, result, fields) {
       if (err) throw err;
       console.log(result);
@@ -281,8 +302,9 @@ app.put("/updatepastemployee", function (req, res) {
 //======PAYROLL======
 //get the most recent payroll of one employee
 app.post("/getRecentPayroll", function (req, res) {
-  const stmt = "Select * FROM payroll WHERE Name = ? AND PaycheckDate = (select max(PaycheckDate) from payroll where Name = ? );"
-  console.log(req.body)
+  const stmt =
+    "Select * FROM payroll WHERE Name = ? AND PaycheckDate = (select max(PaycheckDate) from payroll where Name = ? );";
+  console.log(req.body);
   const data = [req.body.name, req.body.name];
   con.query(stmt, data, function (err, results, fields) {
     if (err) throw err;
@@ -292,27 +314,28 @@ app.post("/getRecentPayroll", function (req, res) {
 });
 
 //add payroll into the db after running the payroll for an employee
-app.post("/postPayroll", function (req, res){
-    let stmt = "INSERT INTO payroll (Name, Salary, PaycheckDate, GrossPay, Taxes, Benefits, Total) VALUES (?, ?, ?, ?, ?, ?, ?);"
-    let data = [
-      req.body.name,
-      req.body.salary,
-      req.body.paycheckDate,
-      req.body.grossPay,
-      req.body.taxes,
-      req.body.benefits,
-      req.body.total
-    ]
-    con.query(stmt, data, function(err, results, fields){
-      if(err) throw err;
-      console.log(results);
-    })
-})
+app.post("/postPayroll", function (req, res) {
+  let stmt =
+    "INSERT INTO payroll (Name, Salary, PaycheckDate, GrossPay, Taxes, Benefits, Total) VALUES (?, ?, ?, ?, ?, ?, ?);";
+  let data = [
+    req.body.name,
+    req.body.salary,
+    req.body.paycheckDate,
+    req.body.grossPay,
+    req.body.taxes,
+    req.body.benefits,
+    req.body.total,
+  ];
+  con.query(stmt, data, function (err, results, fields) {
+    if (err) throw err;
+    console.log(results);
+  });
+});
 
 //get every paycheck from one employee
 app.post("/getEmployeePaychecks", function (req, res) {
-  const stmt = "Select * FROM payroll WHERE Name = ?;"
-  console.log(req.body)
+  const stmt = "Select * FROM payroll WHERE Name = ?;";
+  console.log(req.body);
   const data = [req.body.name, req.body.name];
   con.query(stmt, data, function (err, results, fields) {
     if (err) throw err;
