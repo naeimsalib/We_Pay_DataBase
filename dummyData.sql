@@ -1,10 +1,10 @@
 INSERT INTO employee (Name, Salary, Status, StartDate, Position, Manager, Address, WorkState, LivingState, Phone_Number, Email, SSN)
-VALUES ('John Doe', 95000, 1, '2021-08-16', 'Engineer', 0, '156B North Olive Street Lockport, NY 14094', 'NY', 'NY', '347-444-5555', 'John_Doe@gmail.com', '123-54-0987'),
-('Cortney Pravin', 75000, 1, '2021-05-26', 'Sales', 0, '2 Augusta Street Staten Island, NY 10312', 'NY', 'NY', '347-456-0000', 'Cortney_Pravin@gmail.com', '111-22-3333'),
-('Mike Johnson', 105000, 1, '2019-06-29', 'Manager', 0, '980 Wall Avenue Fresh Meadows, NY 11365', 'NY', 'NY', '555-123-4567', 'Mike_Johnson@gmail.com', '444-55-6666'),
-('Hesham Snorri', 75000, 1, '2020-08-19', 'Sales', 0, '16 Edgewood St. Brooklyn, NY 11220', 'NY', 'NY', '000-222-3333', 'Hesham_Snorri@gmail.com', '777-88-9999'),
-('Amaury Posie', 95000, 1, '2015-09-14', 'Repair Tech', 0, '5 Winchester St. Newburgh, NY 12550, 01234', 'NY', 'NY', '111-222-3333', 'Amaury_Posie@gmail.com', '101-09-8888'),
-('Abram Liva', 95000, 1, '2019-10-10', 'Driver', 0, '230 Gartner Drive Astoria, NY 11105', 'NY', 'NY', '444-555-6666', 'Abram_Liva@gmail.com', '888-89-6789');
+VALUES ('John Doe', 95000, 1, '2021-08-16', 'Engineer', 0, 29,'156B North Olive Street Lockport, NY 14094', 'NY', 'NY', '347-444-5555', 'John_Doe@gmail.com', '123-54-0987'),
+('Cortney Pravin', 75000, 1, '2021-05-26', 'Sales', 0, 26,'2 Augusta Street Staten Island, NY 10312', 'NY', 'NY', '347-456-0000', 'Cortney_Pravin@gmail.com', '111-22-3333'),
+('Mike Johnson', 105000, 1, '2019-06-29', 'Manager', 0, 20,'980 Wall Avenue Fresh Meadows, NY 11365', 'NY', 'NY', '555-123-4567', 'Mike_Johnson@gmail.com', '444-55-6666'),
+('Hesham Snorri', 75000, 1, '2020-08-19', 'Sales', 0, 24,'16 Edgewood St. Brooklyn, NY 11220', 'NY', 'NY', '000-222-3333', 'Hesham_Snorri@gmail.com', '777-88-9999'),
+('Amaury Posie', 95000, 1, '2015-09-14', 'Repair Tech', 0,13, '5 Winchester St. Newburgh, NY 12550, 01234', 'NY', 'NY', '111-222-3333', 'Amaury_Posie@gmail.com', '101-09-8888'),
+('Abram Liva', 95000, 1, '2019-10-10', 'Driver', 0,12, '230 Gartner Drive Astoria, NY 11105', 'NY', 'NY', '444-555-6666', 'Abram_Liva@gmail.com', '888-89-6789');
 
 
 INSERT INTO past_employee (Name, Salary, StartDate, Position, Phone_Number, Email, ReasonOfLeaving)
