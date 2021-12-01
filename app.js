@@ -107,7 +107,7 @@ app.put("/updateemployeebenefit", function (req, res) {
 app.post("/addemployee", function (req, res) {
   console.log(req.body);
   let stmt =
-    "INSERT INTO employee (Name, Email, Salary, Status, StartDate, Position, Address, WorkState, LivingState, Phone_Number, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO employee (Name, Email, Salary, Status, StartDate, Position, EmployeeType, Address, WorkState, LivingState, Phone_Number, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   let employeedata = [
     req.body.name,
     req.body.email,
@@ -115,6 +115,7 @@ app.post("/addemployee", function (req, res) {
     req.body.status,
     req.body.startDate,
     req.body.position,
+    req.body.employeeType,
     req.body.address,
     req.body.workState,
     req.body.livingState,

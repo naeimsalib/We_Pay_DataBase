@@ -11,6 +11,7 @@ Status int, /* Holds the Employee Work Status, 0 for not working , 1 for working
 StartDate DATE, /*Holds the employee hiring date*/
 Position VarChar(255), /*Holds there position*/
 Manager int, /* 0 for False, and 1 for True*/
+EmployeeType VarChar(255), /*Determines if employee is FT(Full time) or PT (Part Time)*/ 
 Hourly_Rate int, /*Holds the employee Hourly rate*/
 Address VarChar(255), /*Holds there address*/
 WorkState VarChar(255), /*Holds there work station*/
