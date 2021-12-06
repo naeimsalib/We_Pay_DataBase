@@ -107,7 +107,7 @@ app.put("/updateemployeebenefit", function (req, res) {
 app.post("/addemployee", function (req, res) {
   console.log(req.body);
   let stmt =
-    "INSERT INTO employee (Name, Email, Salary, Status, StartDate, Position, EmployeeType, Address, WorkState, LivingState, Phone_Number, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO employee (Name, Email, Salary, Status, StartDate, Position, EmployeeType, Hourly_Rate, Hours_Worked, Address, WorkState, LivingState, Phone_Number, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   let employeedata = [
     req.body.name,
     req.body.email,
@@ -116,6 +116,8 @@ app.post("/addemployee", function (req, res) {
     req.body.startDate,
     req.body.position,
     req.body.employeeType,
+    req.body.hourlyRate,
+    req.body.hoursWorked,
     req.body.address,
     req.body.workState,
     req.body.livingState,
@@ -211,11 +213,13 @@ app.post("/findemployeebyname", function (req, res) {
 //update employee
 app.put("/updateemployee", function (req, res) {
   let stmt =
-    "UPDATE employee SET Name = ?, Email = ?, Salary = ?, Status = ?, StartDate = ?, Manager = ?, Address = ?, Phone_Number = ?, Position = ?, WorkState = ?, LivingState = ? WHERE  NAME = ? AND SSN LIKE ?;";
+    "UPDATE employee SET Name = ?, Email = ?, Salary = ?, Hourly_Rate = ?, EmployeeType = ?, Status = ?, StartDate = ?, Manager = ?, Address = ?, Phone_Number = ?, Position = ?, WorkState = ?, LivingState = ? WHERE  NAME = ? AND SSN LIKE ?;";
   let data = [
     req.body.name,
     req.body.email,
     parseInt(req.body.salary),
+    parseInt(req.body.hourlyRate),
+    req.body.employeeType,
     req.body.status,
     req.body.StartDate,
     req.body.manager,

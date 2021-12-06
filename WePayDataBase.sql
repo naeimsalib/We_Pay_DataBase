@@ -13,6 +13,7 @@ Position VarChar(255), /*Holds there position*/
 Manager int, /* 0 for False, and 1 for True*/
 EmployeeType VarChar(255), /*Determines if employee is FT(Full time) or PT (Part Time)*/ 
 Hourly_Rate int, /*Holds the employee Hourly rate*/
+Hours_Worked int, /*Holdes how many hours the employee worked*/
 Address VarChar(255), /*Holds there address*/
 WorkState VarChar(255), /*Holds there work station*/
 LivingState VarChar(255),/*Holds were does the employee works from(State)*/
@@ -56,6 +57,7 @@ Dental_Insurance int
 CREATE TABLE payroll (
 pID int NOT NULL PRIMARY KEY AUTO_INCREMENT, /* Holds the payroll ID*/
 Name VarChar(255), /* holds the Employee Name*/
+HoursWorked int, /*Holds the hours that the employee has worked*/
 Salary int,/*Holds the Employee Salary*/
 PaycheckDate TIMESTAMP, /*Date of when the payroll was posted*/
 GrossPay decimal(10,2), /*Total pay before deductions*/
