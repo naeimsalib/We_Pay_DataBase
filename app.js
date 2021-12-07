@@ -107,7 +107,7 @@ app.put("/updateemployeebenefit", function (req, res) {
 app.post("/addemployee", function (req, res) {
   console.log(req.body);
   let stmt =
-    "INSERT INTO employee (Name, Email, Salary, Status, StartDate, Position, EmployeeType, Hourly_Rate, Hours_Worked, Address, WorkState, LivingState, Phone_Number, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO employee (Name, Email, Salary, Status, StartDate, Position, EmployeeType, Hourly_Rate, Hours_Worked, Working_Hours, Address, WorkState, LivingState, Phone_Number, SSN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   let employeedata = [
     req.body.name,
     req.body.email,
@@ -118,6 +118,7 @@ app.post("/addemployee", function (req, res) {
     req.body.employeeType,
     req.body.hourlyRate,
     req.body.hoursWorked,
+    req.body.workingHours,
     req.body.address,
     req.body.workState,
     req.body.livingState,
@@ -304,6 +305,23 @@ app.put("/updatepastemployee", function (req, res) {
   });
 });
 
+
+//update total employee hours
+app.put("/updatehours", function(req,res){
+  console.log(req.body);
+  let stmt = "UPDATE employee SET Hours_Worked = ? WHERE NAME = ?;"
+  let data = [
+    req.body.hoursWorked,
+    req.body.name
+  ]
+  con.query(stmt, data, (err, results, fields) => {
+    res.send(results);
+    if(err) {
+      return console.error(err.message);
+    }
+  })
+})
+
 //======PAYROLL======
 //get the most recent payroll of one employee
 app.post("/getRecentPayroll", function (req, res) {
@@ -321,9 +339,10 @@ app.post("/getRecentPayroll", function (req, res) {
 //add payroll into the db after running the payroll for an employee
 app.post("/postPayroll", function (req, res) {
   let stmt =
-    "INSERT INTO payroll (Name, Salary, PaycheckDate, GrossPay, Taxes, Benefits, Total) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    "INSERT INTO payroll (Name, HoursWorked, Salary, PaycheckDate, GrossPay, Taxes, Benefits, Total) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
   let data = [
     req.body.name,
+    req.body.workingHours,
     req.body.salary,
     req.body.paycheckDate,
     req.body.grossPay,
@@ -331,6 +350,7 @@ app.post("/postPayroll", function (req, res) {
     req.body.benefits,
     req.body.total,
   ];
+  console.log(data)
   con.query(stmt, data, function (err, results, fields) {
     if (err) throw err;
     console.log(results);
